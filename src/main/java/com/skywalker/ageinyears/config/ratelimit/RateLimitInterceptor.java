@@ -26,7 +26,7 @@ public class RateLimitInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        ConsumptionProbe probe = rateLimiterService.probeTokenConsumption("key");
+        ConsumptionProbe probe = rateLimiterService.probeTokenConsumption(dob);
         long tokensPerSecond = rateLimiterService.getTokensPerSecond();
         long tokensRemaining = probe.getRemainingTokens();
 

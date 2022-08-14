@@ -34,6 +34,6 @@ public class RateLimiterServiceImpl implements RateLimiterService {
     }
 
     public long getTokensPerSecond() {
-        return 2;
+        return 3;
     }
 }
