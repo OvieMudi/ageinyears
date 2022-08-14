@@ -4,9 +4,9 @@ import com.skywalker.ageinyears.dto.response.AgeCalculatorResponse;
 import com.skywalker.ageinyears.service.AgeCalculatorService;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 @Service
@@ -19,12 +19,13 @@ public class AgeCalculatorImpl implements AgeCalculatorService {
     }
 
     private static long getYearsBetween(String dob) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDate = LocalDate.parse(dob, format);
+        long timestamp = Long.parseLong(dob);
+        ZoneId zoneId = ZoneId.systemDefault();
+        LocalDate localDate = Instant.ofEpochMilli(timestamp).atZone(zoneId).toLocalDate();
 
         return ChronoUnit.YEARS.between(
                 localDate,
-                LocalDate.now(ZoneId.systemDefault())
+                LocalDate.now(zoneId)
         );
     }
 }
