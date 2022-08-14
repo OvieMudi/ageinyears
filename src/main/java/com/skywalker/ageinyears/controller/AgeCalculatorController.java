@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 @RestController
 @AllArgsConstructor
 @Validated
@@ -26,11 +23,7 @@ public class AgeCalculatorController {
     }
 
     @GetMapping("/howold")
-    public AgeCalculatorResponse howOld(
-            @RequestParam("dob")
-            @Size(min = 10, max = 13)
-            @Pattern(regexp = "^\\d+$", message = "dob is an invalid timestamp")
-            String dob) {
+    public AgeCalculatorResponse howOld(@RequestParam("dob") String dob) {
         return ageCalculatorService.calculateAge(dob);
     }
 }

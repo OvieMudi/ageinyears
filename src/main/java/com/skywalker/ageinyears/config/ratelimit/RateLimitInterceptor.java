@@ -10,6 +10,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static com.skywalker.ageinyears.utiils.RequestValidatorUtil.validRequestParam;
+
 @Configuration
 @AllArgsConstructor
 public class RateLimitInterceptor implements HandlerInterceptor {
@@ -21,7 +23,7 @@ public class RateLimitInterceptor implements HandlerInterceptor {
             throws Exception {
         String dob = request.getParameter("dob");
 
-        if (dob == null || dob.isEmpty()) {
+        if (!validRequestParam(dob)) {
             response.sendError(HttpStatus.BAD_REQUEST.value(), "Missing Param: dob");
             return false;
         }
