@@ -2,6 +2,7 @@ package com.skywalker.ageinyears.config.ratelimit;
 
 import com.skywalker.ageinyears.service.RateLimiterService;
 import io.github.bucket4j.ConsumptionProbe;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -10,13 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Configuration
+@AllArgsConstructor
 public class RateLimitInterceptor implements HandlerInterceptor {
 
     private final RateLimiterService rateLimiterService;
-
-    public RateLimitInterceptor(RateLimiterService rateLimiterService) {
-        this.rateLimiterService = rateLimiterService;
-    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
